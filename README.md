@@ -144,7 +144,7 @@ Orange Sulphur aims to comply with:
 
 * **Team Orange Sulphur (SER598 Group 2)**
 
-  * [Your Name Here]
+  * Ritik Zambre - rzambre
   * [Team Member 2]
   * [Team Member 3]
   * [Team Member 4]
