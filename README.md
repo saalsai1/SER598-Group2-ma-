@@ -85,7 +85,7 @@ src/
 
 ```bash
 git clone https://github.com/<your-org>/OrangeSulphur.git
-cd OrangeSulphur
+cd SER985-Group2-MA-
 ```
 
 ### 2️⃣ Install dependencies
