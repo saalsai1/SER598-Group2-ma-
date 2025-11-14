@@ -9,7 +9,7 @@ export const products = [
       calories: 47,
       vitamins: ['Vitamin C', 'Folate', 'Thiamine'],
     },
-    organic: true,
+    organic: true
   },
   {
     id: 2,
@@ -240,3 +240,108 @@ export const products = [
     organic: true,
   },
 ];
+
+
+
+
+// Live data fetching type 
+
+
+// import type { ProductCardProps } from '../components/ProductCard'
+
+// type Product = ProductCardProps & { id:string | number}
+
+
+// export async function fetchProductsFromOFF(): Promise<Product[]> {
+//    const res = await fetch(
+//     "https://world.openfoodfacts.org/category/fruits.json?fields=product_name,brands,image_front_url,nutriscore_grade,nutriments,labels,ingredients_text"
+//   )
+
+//   if(!res.ok){ 
+//     throw new Error("failed to fetch")
+//   }
+
+//   const data = await res.json()
+
+// // product return OFF products:[...]
+// const items  = data.products.slice(0,24)
+// const products: Product[] = items
+//                           .filter((prod: any) => prod.product_name && prod.image_front_url && prod.nutriments)
+//                           .map((prod:any, index:number) => { 
+//                           const nutriments = prod.nutriments || {}
+
+//                           // calorie estimates / 100g
+//                         const calories = 
+//                                 nutriments["energy-kcal_100g"] ??
+//                                 nutriments["energy-kcal"] ??
+//                                 nutriments["energy_100g"] ??
+//                                 0
+
+//                         // vitamin in the product
+//                         const ingredient = (prod.ingredients_text ?? '').toLowerCase()
+//                         const vitamins : string[] = []
+//                         if(ingredient.include("vitamin c")) vitamins.push("Vitamin C")
+//                         if(ingredient.include("vitamin a")) vitamins.push("Vitamin A")
+//                         if(ingredient.include("iron")) vitamins.push("Iron")
+
+//                           if(vitamins.length === 0 ){ 
+//                             vitamins.push("Natural Nutrients")
+//                           }
+                        
+//                         const labels = (prod.labels ?? "").toLowerCase()
+//                         const organic = 
+//                               labels.includes("organic") ||
+//                               labels.includes("bio") ||
+//                               labels.includes("ecologique") ||
+//                               labels.includes("non-gmo") 
+                        
+//                         // fake price 
+//                         const basePrice = 5 + Math.random()*12
+//                         const price = Math.round(basePrice*100)/100
+
+//                         return {
+//                                 id: prod.id ?? index,
+//                                 name: prod.product_name,
+//                                 category: "Fruits / Grocery",
+//                                 price,
+//                                 image: prod.image_front_url,
+//                                 nutrition: {
+//                                   calories: Math.round(calories) || 50,
+//                                   vitamins,
+//                                 },
+//                                 organic,
+//                               }
+
+
+//                           })
+
+//                           return products
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export type Product = { 
+//   id: number 
+//   name : string 
+//   category: string 
+//   price: string 
+//   image: string
+//   nutrition: { 
+//     calories: number
+//     vitamin: string[]
+
+//   } 
+//   organic: boolean
+// }

@@ -4,6 +4,9 @@ import { ShoppingCart } from 'lucide-react'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 
+
+// type Product = React.ComponentProps<typeof ProductCard> & { id: number | string }
+
 interface ProductCardProps { 
     name:string
     category: string
