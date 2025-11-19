@@ -9,29 +9,29 @@ The project serves as an **online store for buying and learning about organic fr
 
 Orange Sulphur allows users to:
 
-* Explore and purchase **organic fruits and vegetables**.
-* Browse products by **diverse food categories**.
-* Learn **nutritional values** and **vitamin facts** about each item.
-* Discover **recipes** created using fruits and vegetables through an integrated **Recipe API**.
-* Experience a **modern, accessible web interface** designed for users with various abilities and needs.
+- Explore and purchase **organic fruits and vegetables**.
+- Browse products by **diverse food categories**.
+- Learn **nutritional values** and **vitamin facts** about each item.
+- Discover **recipes** created using fruits and vegetables through an integrated **Recipe API**.
+- Experience a **modern, accessible web interface** designed for users with various abilities and needs.
 
 ---
 
 ## 🎯 Acceptance Criteria
 
-* ✅ Website serves as an **Online Organic Store**.
-* ✅ Displays **food categories**, **nutritional data**, and **vitamin facts**.
-* ✅ Implements **Recipe Search Integration** using a Recipe API.
-* ✅ Provides **modern accessibility features**:
+- ✅ Website serves as an **Online Organic Store**.
+- ✅ Displays **food categories**, **nutritional data**, and **vitamin facts**.
+- ✅ Implements **Recipe Search Integration** using a Recipe API.
+- ✅ Provides **modern accessibility features**:
 
-  * Support for **digital on-screen keyboard**.
-  * **Audio narration** and **text-to-speech** features.
-  * **Color blindness–friendly palette** and **high-contrast mode**.
-  * **Font size adjustments** for readability.
-  * **ARIA compliance** for assistive technologies (screen readers).
-  * **Keyboard navigation** and **focus visibility**.
-  * **Reduced motion / dyslexia-friendly font options**.
-  * A **mode toggle button** in the navigation bar allows users to enable or switch between accessibility modes.
+  - Support for **digital on-screen keyboard**.
+  - **Audio narration** and **text-to-speech** features.
+  - **Color blindness–friendly palette** and **high-contrast mode**.
+  - **Font size adjustments** for readability.
+  - **ARIA compliance** for assistive technologies (screen readers).
+  - **Keyboard navigation** and **focus visibility**.
+  - **Reduced motion / dyslexia-friendly font options**.
+  - A **mode toggle button** in the navigation bar allows users to enable or switch between accessibility modes.
 
 ---
 
@@ -51,13 +51,13 @@ Orange Sulphur allows users to:
 
 ## 🧩 Features
 
-* 🛒 **Organic Storefront** – Shop fruits & vegetables with clear labeling.
-* 🧠 **Nutrition Insights** – Understand what you consume via detailed nutrition facts.
-* 🍳 **Recipe Finder** – Fetch and explore recipes using fruits and vegetables.
-* ♿ **Accessibility Suite** – Inclusive support for vision, hearing, and motor impairments.
-* 🌗 **Dynamic Mode Switch** – Toggle between standard and accessibility-enhanced modes.
-* 🔍 **Search & Filter** – Quickly find items by category, name, or nutrition type.
-* 💬 **Voice Assistance (Planned)** – Integrated voice command and feedback system.
+- 🛒 **Organic Storefront** – Shop fruits & vegetables with clear labeling.
+- 🧠 **Nutrition Insights** – Understand what you consume via detailed nutrition facts.
+- 🍳 **Recipe Finder** – Fetch and explore recipes using fruits and vegetables.
+- ♿ **Accessibility Suite** – Inclusive support for vision, hearing, and motor impairments.
+- 🌗 **Dynamic Mode Switch** – Toggle between standard and accessibility-enhanced modes.
+- 🔍 **Search & Filter** – Quickly find items by category, name, or nutrition type.
+- 💬 **Voice Assistance (Planned)** – Integrated voice command and feedback system.
 
 ---
 
@@ -112,42 +112,42 @@ npm run build
 
 Orange Sulphur aims to comply with:
 
-* **WAI-ARIA 1.2**
-* **WCAG 2.1 AA** Standards
-* Inclusive design principles for:
+- **WAI-ARIA 1.2**
+- **WCAG 2.1 AA** Standards
+- Inclusive design principles for:
 
-  * Visual disabilities (color blindness, low vision)
-  * Hearing impairments
-  * Cognitive and learning disabilities
-  * Motor and mobility limitations
+  - Visual disabilities (color blindness, low vision)
+  - Hearing impairments
+  - Cognitive and learning disabilities
+  - Motor and mobility limitations
 
 ---
 
 ## 📡 APIs Used
 
-* **Recipe API** for fetching fruit/vegetable-based recipes.
-* **(Planned)**: Additional open food/nutrition databases.
+- **Recipe API** for fetching fruit/vegetable-based recipes.
+- **(Planned)**: Additional open food/nutrition databases.
 
 ---
 
 ## 🧠 Future Enhancements
 
-* Integration with **voice assistant commands**.
-* **User authentication** and profile management.
-* **Cart and payment** integration.
-* **Machine learning recommendations** for recipes and nutrition plans.
-* **Dark mode** and **auto-accessibility detection**.
+- Integration with **voice assistant commands**.
+- **User authentication** and profile management.
+- **Cart and payment** integration.
+- **Machine learning recommendations** for recipes and nutrition plans.
+- **Dark mode** and **auto-accessibility detection**.
 
 ---
 
 ## 👩‍💻 Contributors
 
-* **Team Orange Sulphur (SER598 Group 2)**
+- **Team Orange Sulphur (SER598 Group 2)**
 
-  * Ritik Zambre - rzambre
-  * [Team Member 2]
-  * [Team Member 3]
-  * [Team Member 4]
+  - Ritik Zambre - rzambre
+  - Prerana Nale - pnale
+  - [Team Member 3]
+  - [Team Member 4]
 
 ---
 
@@ -156,4 +156,3 @@ Orange Sulphur aims to comply with:
 This project is licensed under the **MIT License** – see the [LICENSE](./LICENSE) file for details.
 
 ---
-
