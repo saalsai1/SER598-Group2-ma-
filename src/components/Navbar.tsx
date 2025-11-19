@@ -55,6 +55,9 @@ const Navbar = () => {
             <Button variant="default" size="default">
               Shop Now
             </Button>
+              <Button variant="default" size="default" className='cursor-pointer'>
+              Login
+            </Button>
           </div>
 
           {/* Mobile menu button */}

@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "8a3bc242-0132-4321-9340-0d7c09660ae5",
+		"name": "Grocery APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8726117",
+		"_collection_link": "https://warped-astronaut-748481.postman.co/workspace/New-Team-Workspace~f3786562-42cb-45a0-8d1c-b03a55676f0f/collection/8726117-8a3bc242-0132-4321-9340-0d7c09660ae5?action=share&source=collection_link&creator=8726117"
+	},
+	"item": [
+		{
+			"name": "Get all groceries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all groceries by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries?category=DAIRY",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "DAIRY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all groceries by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/YOG",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"YOG"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a grocery by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/YOG",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"YOG"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new grocery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item\": \"Bread\",\n    \"groceryType\": \"BREADS\",\n    \"price\": 1.99,\n    \"producers\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/groceries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a grocery item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"WHB\",\n    \"item\": \"Bread\",\n    \"groceryType\": \"BREADS\",\n    \"price\": 1.99,\n    \"producers\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/groceries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all producers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/producers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get producers by abbreviation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/producers/LOLK",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers",
+						"LOLK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new producer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sample\",\n    \"address\": \"D Carlos\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/producers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a producer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abbreviation\": \"LOLK\",\n    \"name\": \"Sample\",\n    \"address\": \"D Carlos\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/producers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a producer address",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"address\": \"M Way\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/producers/LOLK",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers",
+						"LOLK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a producer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/producers/LOLK",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"producers",
+						"LOLK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all producers for a grocery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/MLK/producers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"MLK",
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one producer for a grocery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/MLK/producers/BRHD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"MLK",
+						"producers",
+						"BRHD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a producer for a grocery",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/YOG/producers/BRHD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"YOG",
+						"producers",
+						"BRHD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a producer for a grocery",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/groceries/YOG/producers/BRHD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"groceries",
+						"YOG",
+						"producers",
+						"BRHD"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
