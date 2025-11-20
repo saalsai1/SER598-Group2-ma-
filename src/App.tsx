@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import Store from "./pages/Store";
 import NotFound from "./pages/NotFound";
 import Recipe from './pages/Recipe';
-
+import AccessibilityEffects from "@/components/AccessibilityEffects";
 
 const queryClient = new QueryClient();
 
@@ -17,12 +17,14 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BrowserRouter>
+          {/* Applies high contrast, font size, color-blind mode, etc */}
+          <AccessibilityEffects />
+
           <Sonner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/store" element={<Store />} />
             <Route path="/recipes" element={<Recipe />} />
-         
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
