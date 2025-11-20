@@ -161,3 +161,50 @@
     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }
+
+/* Color-blind modes */
+html.cb-none {
+  filter: none;
+}
+
+html.cb-protanopia {
+  filter: saturate(0.8) sepia(0.3);
+}
+
+html.cb-deuteranopia {
+  filter: saturate(0.8) hue-rotate(15deg);
+}
+
+html.cb-tritanopia {
+  filter: saturate(0.8) hue-rotate(-45deg);
+}
+
+/* Font sizes tied to redux values: normal / large / xlarge */
+html.fs-normal {
+  font-size: 100%;
+}
+
+html.fs-large {
+  font-size: 112%;
+}
+
+html.fs-xlarge {
+  font-size: 125%;
+}
+
+/* High contrast */
+html.a11y-high-contrast {
+  filter: contrast(1.25) saturate(1.2);
+}
+
+/* Reduced motion */
+html.a11y-reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Dyslexia-friendly font */
+html.a11y-dyslexia-font {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "OpenDyslexic", sans-serif;
+}
