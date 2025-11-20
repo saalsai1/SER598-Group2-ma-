@@ -198,7 +198,7 @@ async function fetchDetailsById(id: string) {
         const data = await response.json();
         
         if (data.meals) {
-          const featured = data.meals.slice(0, 6).map(normaliseMeal);
+          const featured = data.meals.slice(0, 4).map(normaliseMeal);
           setResults(featured);
         }
       } catch (err) {
@@ -239,93 +239,106 @@ if (window.innerWidth < 1024) {
 
 
     return (
-        <div>
-            <div>
-                <header>
-                    <h1> Recipe Searchh</h1>
-
+         <div className="min-h-screen bg-gray-50 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                            🍳  Recipe Searchh
+                    </h1>
+                        <p className="text-gray-600">Discover delicious recipes from around the world</p>
                 </header>
 
-                <form onSubmit={onSubmit}>
-                    <label htmlFor="recipe">Search Recipe by Name</label>
+                <form onSubmit={onSubmit} className="max-w-2xl mx-auto mb-8">
+                    <label htmlFor="recipe" className='sr-only'>Search Recipe by Name</label>
+                     <div className="flex gap-2">
                     <input
                         type="text"
                         id='recipe'
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder='Try: Chicken,..'
+                         className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     />
                     <button
                         type='submit'
-
+                        disabled={loading}
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     >
-                        Search
+                       {loading ? 'Searching...' : 'Search'}
                     </button>
 
-
+</div>
 
                 </form>
 
                 {loading && (
-                    <div>Searching...</div>
+                     <div className="text-center py-8">
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+                        <p className="mt-2 text-gray-600">Loading recipes...</p>
+                    </div>
                 )}
                 {error && !loading && (
-                    <div>{error}</div>
+                    <div className="max-w-2xl mx-auto mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">{error}</div>
                 )}
 
 
                 {/* result + layout for the recipe panel */}
-                <div>
-                    <section>
-                        <div>
-                            <h2>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+                    <section className="lg:col-span-2">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-semibold text-gray-900">
                                 {results.length ? "Results" : "No Results"}
                             </h2>
-                            <span>
+                            <span className="text-xs text-neutral-600">
                                 {results.length} item(s)
                             </span>
                         </div>
 
                         {results.length > 0 ? (
-                            <ul>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {results.map((r) => (
-                                    <li key={r.id}>
-                                        <h3 title={r.name}>
+                                    <li key={r.id} className="bg-white rounded-2xl shadow-sm p-4 border border-neutral-200 hover:shadow transition">
+                                        <h3 className="text-lg font-medium leading-tight mb-3 line-clamp-2" title={r.name}>
                                             {r.name}
                                         </h3>
 
                                         {r.thumb ? (
                                             <button
                                                 onClick={() => openDetails(r.id)}
+                                                className="block w-full text-left"
                                                 aria-label={`Open DEtails for ${r.name}`}
                                             >
                                                 <img
                                                     src={r.thumb}
                                                     alt={r.name}
                                                     loading='lazy'
+                                                    className="w-full rounded-xl aspect-video object-cover bg-neutral-100"
                                                 />
                                             </button>
                                         ) : (
                                             <button
                                                 onClick={() => openDetails(r.id)}
+                                                className="block w-full text-left"
                                             >
-                                                <div>
-                                                    No IMage Found
-                                                </div>
+                                                <div className="w-full rounded-xl aspect-video bg-neutral-100 grid place-items-center text-neutral-400 text-sm">
+                                                            No image
+                                                            </div>
 
                                             </button>
 
                                         )}
 
                                         {/* fetch metadata  */}
-                                        <div>
+                                       <div className="mt-3 text-xs text-neutral-600 flex items-center gap-2">
                                             {r.category && (
-                                                <span>
+                                                <span className="inline-flex items-center rounded-full border border-green-500 text-green-700 px-2 py-0.5 font-medium">
                                                     {r.category}
                                                 </span>
                                             )}
                                             {r.area && (
-                                                <span>{r.area}</span>
+                                             <span className="inline-flex items-center rounded-full border border-neutral-300 text-neutral-700 px-2 py-0.5">
+                                                    {r.area}</span>
                                             )}
                                         </div>
                                     </li>
@@ -333,44 +346,46 @@ if (window.innerWidth < 1024) {
                             </ul>
                         ) :
                             (
-                                !loading && <div>No Results, try different name..</div>
+                                !loading && <div className="text-sm text-neutral-600">No Results, try different name..</div>
                             )
                         }
 
 
                     </section>
                     {/* detailed pane  */}
-                    <aside>
-                        <div>
+                   <aside className="lg:col-span-1">
+<div className="sticky top-6">
                             {!selected && (
-                                <div>Select Recipe to view Details.</div>
+                                <div className="text-sm text-neutral-600">Select Recipe to view Details.</div>
                             )}
 
                             {detailLoading && (
-                                <div> Loading Detail...</div>
+                               <div className="text-sm text-neutral-600"> Loading Detail...</div>
                             )}
 
                             {detailError && (
-                                <div>{detailError}</div>
+                              <div className="text-sm text-red-600">{detailError}</div>
                             )}
 
                             {selected && !detailLoading && (
-                                <div>
-                                    <div>
-                                        <h3>{selected.strMeal}</h3>
+                                <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 p-4">
+<div className="flex items-start justify-between gap-3">
+<h3 className="text-xl font-semibold leading-tight">
+                                            {selected.strMeal}</h3>
                                     </div>
 
                                     {/* ring tags  */}
 
-                                    <div>
+                                   <div className="mt-2 flex items-center gap-2 text-xs">
                                         {selected.strCategory && (
-                                            <span>
+                                          <span className="inline-flex items-center rounded-full border border-green-500 text-green-700 px-2 py-0.5 font-medium">
+{selected.strCategory}
                                                 {selected.strCategory}
                                             </span>
                                         )}
 
                                         {selected.strArea && (
-                                            <span>
+                                           <span className="inline-flex items-center rounded-full border border-neutral-300 text-neutral-700 px-2 py-0.5">
                                                 {selected.strArea}
                                             </span>
                                         )}
@@ -382,20 +397,20 @@ if (window.innerWidth < 1024) {
                                             src={selected.strMealThumb}
                                             alt={selected.strMeal}
                                             loading='lazy'
-
+className="w-full rounded-xl aspect-video object-cover bg-neutral-100 mt-3"
                                         />
                                     )}
 
                                     {/* instructions ( this i=s collapse optionkl) */}
-                                    <div>
-                                        <h4>Instructions </h4>
+                               <div className="mt-4">
+                                      <h4 className="font-medium mb-2">Instructions </h4>
                                         {/* we will parse the instructions from the recipe db here ( from the functin) */}
                                         {(() => {
                                             const steps = parseInstructions(selected.strInstructions)
                                             const show = showAllSteps ? steps : steps.slice(0, 2)
                                             return (
                                                 <>
-                                                    <ol>
+                                                    <ol className="list-decimal pl-5 space-y-1 text-sm text-neutral-800">
                                                         {show.map((s, idx) => (
                                                             <li key={idx}>{s}</li>
                                                         ))}
@@ -403,6 +418,7 @@ if (window.innerWidth < 1024) {
                                                     {steps.length > 2 && (
                                                         <button
                                                             onClick={() => setShowAllSteps((v) => !v)}
+                                                            className="mt-2 text-sm underline decoration-neutral-400 hover:decoration-neutral-800"
                                                         >
                                                             {showAllSteps ? "show less" : `Show ${steps.length - 2} more steps`}
                                                         </button>
@@ -414,14 +430,15 @@ if (window.innerWidth < 1024) {
 
                                     {/* yt toggle space  */}
                                     {selected.strYoutube && (
-                                        <div>
+                                    <div className="mt-4">
                                             <button
                                                 onClick={() => setShowVideo((v) => !v)}
+                                                className="text-sm underline decoration-neutral-400 hover:decoration-neutral-800"
                                             >
                                                 {showVideo ? "Hide Video" : "Watch on YouTube"}
                                             </button>
                                             {showVideo && youtubeEmbedUrl(selected.strYoutube) && (
-                                                <div>
+                                               <div className="mt-2 aspect-video rounded-xl overflow-hidden bg-black">
                                                     <iframe
                                                         src={youtubeEmbedUrl(selected.strYoutube)}
                                                         title="Recipe video"
@@ -436,19 +453,20 @@ if (window.innerWidth < 1024) {
                                     )}
 
                                     {/* ingredient fetch  */}
-                                    <div>
+                                 <div className="mt-4">
                                         <button
                                             onClick={() => setShowIngredients((v) => !v)}
+                                            className="text-sm underline decoration-neutral-400 hover:decoration-neutral-800"
                                         >
                                             {showIngredients ? "Hide Ingredient" : "Show Ingredient"}
                                         </button>
                                         {showIngredients && (
-                                            <ul>
+                                           <ul className="mt-2 divide-y divide-neutral-200 text-sm">
                                                 {buildIngredients(selected).map(({ ingredient, measure }, i) => (
-                                                    <li key={i}>
-                                                        <span>{ingredient}</span>
-                                                        <span>{measure}</span>
-                                                    </li>
+                                                    <li key={i} className="py-1 flex items-center justify-between gap-3">
+<span className="text-neutral-800">{ingredient}</span>
+<span className="text-neutral-600">{measure}</span>
+</li>
                                                 ))}
                                             </ul>
                                         )}
@@ -471,3 +489,4 @@ if (window.innerWidth < 1024) {
     )
 
 }
+

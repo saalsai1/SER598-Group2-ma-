@@ -1,11 +1,13 @@
 import React from 'react'
 // @ts-ignore
 import  RecipeSearch from "../components/recipes/RecipeSearch"
+import Navbar from '@/components/Navbar'
 const Recipe = () => {
   return (
-   <main className='min-h-screen'>
-    <RecipeSearch />
-   </main>
+    <><Navbar /><main className='min-h-screen'>
+
+      <RecipeSearch />
+    </main></>
   )
 }
 
