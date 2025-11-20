@@ -1,7 +1,7 @@
 import { MEALDB_BASE } from '@/lib/meal'
 import React, { useEffect, useRef, useState } from 'react'
 
-const API_BASE = MEALDB_BASE
+const API_BASE = MEALDB_BASE || "https://www.themealdb.com/api/json/v1/1"
 
 interface MealSummary {
     id: string
