@@ -1,55 +1,76 @@
-import Navbar from '@/components/Navbar'
-import ProductCard from '@/components/ProductCard'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectValue } from '@/components/ui/select'
-import { products } from '@/data/products'
-import { RootState } from '@/redux/store'
-import { SelectTrigger } from '@radix-ui/react-select'
-import { Search } from 'lucide-react'
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import Navbar from "@/components/Navbar";
+import ProductCard from "@/components/ProductCard";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { products } from "@/data/products";
+import { RootState } from "@/redux/store";
+import { SelectTrigger } from "@radix-ui/react-select";
+import { Search } from "lucide-react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Store = () => {
-  
-  const [searchQuery, setSearchQuery ] = useState(' ')
-  const[categoryFilter, setCategoryFilter ] = useState('all')
-  const accessibility = useSelector((state : RootState) => state.accessibility)
+  const [searchQuery, setSearchQuery] = useState(" ");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const accessibility = useSelector((state: RootState) => state.accessibility);
 
-  const categories = ['all', ...Array.from(new Set(products.map(p => p.category)))]
+  const categories = [
+    "all",
+    ...Array.from(new Set(products.map((p) => p.category))),
+  ];
 
-  const filteredProducts = products.filter(product => { 
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      categoryFilter === "all" || product.category === categoryFilter;
+    return matchesSearch && matchesCategory;
+  });
 
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || product.category.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter 
-    return matchesSearch && matchesCategory
-  })
-  
-  
-    return (
-   <div 
-      className={`min-h-screen ${accessibility.highContrast ? 'contrast-125' : ''} ${accessibility.reducedMotion ? 'motion-reduce:transition-none' : ''}`}
+  return (
+    <div
+      className={`min-h-screen ${
+        accessibility.highContrast ? "contrast-125" : ""
+      } ${accessibility.reducedMotion ? "motion-reduce:transition-none" : ""}`}
       style={{
-        fontSize: accessibility.fontSize === 'large' ? '1.125rem' : accessibility.fontSize === 'xlarge' ? '1.25rem' : '1rem',
-        fontFamily: accessibility.dyslexiaFont ? 'OpenDyslexic, Comic Sans MS, sans-serif' : 'inherit',
+        fontSize:
+          accessibility.fontSize === "large"
+            ? "1.125rem"
+            : accessibility.fontSize === "xlarge"
+            ? "1.25rem"
+            : "1rem",
+        fontFamily: accessibility.dyslexiaFont
+          ? "OpenDyslexic, Comic Sans MS, sans-serif"
+          : "inherit",
       }}
     >
       <Navbar />
-      
-      <main className="container mx-auto px-4 py-8">
+
+      <main id="main-content" className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-12 text-center animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Organic Store
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover our complete selection of fresh, organic fruits and vegetables
+            Discover our complete selection of fresh, organic fruits and
+            vegetables
           </p>
         </div>
 
         {/* Filters Section */}
         <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between animate-slide-up">
           <div className="relative w-full md:w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+              aria-hidden="true"
+            />
             <Input
               type="text"
               placeholder="Search products..."
@@ -59,15 +80,18 @@ const Store = () => {
               aria-label="Search products"
             />
           </div>
-          
+
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-full md:w-64" aria-label="Filter by category">
+            <SelectTrigger
+              className="w-full md:w-64"
+              aria-label="Filter by category"
+            >
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              {categories.map(category => (
+              {categories.map((category) => (
                 <SelectItem key={category} value={category}>
-                  {category === 'all' ? 'All Categories' : category}
+                  {category === "all" ? "All Categories" : category}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -75,8 +99,13 @@ const Store = () => {
         </div>
 
         {/* Results Count */}
-        <div className="mb-6 text-sm text-muted-foreground" role="status" aria-live="polite">
-          Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+        <div
+          className="mb-6 text-sm text-muted-foreground"
+          role="status"
+          aria-live="polite"
+        >
+          Showing {filteredProducts.length}{" "}
+          {filteredProducts.length === 1 ? "product" : "products"}
         </div>
 
         {/* Products Grid */}
@@ -88,7 +117,9 @@ const Store = () => {
           </div>
         ) : (
           <div className="text-center py-16" role="alert">
-            <p className="text-xl text-muted-foreground mb-2">No products found</p>
+            <p className="text-xl text-muted-foreground mb-2">
+              No products found
+            </p>
             <p className="text-sm text-muted-foreground">
               Try adjusting your search or filter criteria
             </p>
@@ -96,7 +127,7 @@ const Store = () => {
         )}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Store
+export default Store;

@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <div>
       <Navbar />
-      
+    <main id="main-content">
      <section 
         className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted overflow-hidden"
         role="banner"
@@ -125,6 +125,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      </main>
 
         {/* FOOTER VERY IMP */}
         <footer className="bg-card border-t border-border py-12 px-4 sm:px-6 lg:px-8" role="contentinfo">
