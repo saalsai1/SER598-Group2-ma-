@@ -1,0 +1,342 @@
+export const products = [
+  {
+    id: 1,
+    name: 'Organic Oranges',
+    category: 'Fruits',
+    price: 4.99,
+    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?w=800&q=80',
+    nutrition: {
+      calories: 47,
+      vitamins: ['Vitamin C', 'Folate', 'Thiamine'],
+    },
+    organic: true
+  },
+  {
+    id: 2,
+    name: 'Fresh Spinach',
+    category: 'Leafy Greens',
+    price: 3.49,
+    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=800&q=80',
+    nutrition: {
+      calories: 23,
+      vitamins: ['Vitamin K', 'Vitamin A', 'Iron'],
+    },
+    organic: true,
+  },
+  {
+    id: 3,
+    name: 'Heirloom Tomatoes',
+    category: 'Vegetables',
+    price: 5.99,
+    image: 'https://images.unsplash.com/photo-1546470427-e26264be0fbd?w=800&q=80',
+    nutrition: {
+      calories: 18,
+      vitamins: ['Vitamin C', 'Vitamin K', 'Potassium'],
+    },
+    organic: true,
+  },
+  {
+    id: 4,
+    name: 'Organic Carrots',
+    category: 'Root Vegetables',
+    price: 2.99,
+    image: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=800&q=80',
+    nutrition: {
+      calories: 41,
+      vitamins: ['Vitamin A', 'Beta-Carotene', 'Fiber'],
+    },
+    organic: true,
+  },
+  {
+    id: 5,
+    name: 'Fresh Kale',
+    category: 'Leafy Greens',
+    price: 4.49,
+    image: 'https://images.unsplash.com/photo-1560170412-572ca8d7fa9b?w=800&q=80',
+    nutrition: {
+      calories: 33,
+      vitamins: ['Vitamin K', 'Vitamin C', 'Calcium'],
+    },
+    organic: true,
+  },
+  {
+    id: 6,
+    name: 'Red Bell Peppers',
+    category: 'Vegetables',
+    price: 3.99,
+    image: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=800&q=80',
+    nutrition: {
+      calories: 31,
+      vitamins: ['Vitamin C', 'Vitamin A', 'Folate'],
+    },
+    organic: true,
+  },
+  {
+    id: 7,
+    name: 'Organic Blueberries',
+    category: 'Berries',
+    price: 6.99,
+    image: 'https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=800&q=80',
+    nutrition: {
+      calories: 57,
+      vitamins: ['Vitamin C', 'Vitamin K', 'Antioxidants'],
+    },
+    organic: true,
+  },
+  {
+    id: 8,
+    name: 'Fresh Broccoli',
+    category: 'Cruciferous',
+    price: 3.29,
+    image: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=800&q=80',
+    nutrition: {
+      calories: 34,
+      vitamins: ['Vitamin C', 'Vitamin K', 'Folate'],
+    },
+    organic: true,
+  },
+  {
+    id: 9,
+    name: 'Organic Avocados',
+    category: 'Fruits',
+    price: 7.99,
+    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=800&q=80',
+    nutrition: {
+      calories: 160,
+      vitamins: ['Vitamin K', 'Folate', 'Healthy Fats'],
+    },
+    organic: true,
+  },
+  {
+    id: 10,
+    name: 'Sweet Potatoes',
+    category: 'Root Vegetables',
+    price: 3.49,
+    image: 'https://images.unsplash.com/photo-1589927986089-35812378d7a9?w=800&q=80',
+    nutrition: {
+      calories: 86,
+      vitamins: ['Vitamin A', 'Vitamin C', 'Fiber'],
+    },
+    organic: true,
+  },
+  {
+    id: 11,
+    name: 'Organic Strawberries',
+    category: 'Berries',
+    price: 5.99,
+    image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=800&q=80',
+    nutrition: {
+      calories: 32,
+      vitamins: ['Vitamin C', 'Manganese', 'Antioxidants'],
+    },
+    organic: true,
+  },
+  {
+    id: 12,
+    name: 'Fresh Asparagus',
+    category: 'Vegetables',
+    price: 4.79,
+    image: 'https://images.unsplash.com/photo-1565808332270-7f9faf92e7e5?w=800&q=80',
+    nutrition: {
+      calories: 20,
+      vitamins: ['Vitamin K', 'Folate', 'Vitamin C'],
+    },
+    organic: true,
+  },
+  {
+    id: 13,
+    name: 'Organic Bananas',
+    category: 'Fruits',
+    price: 2.99,
+    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&q=80',
+    nutrition: {
+      calories: 89,
+      vitamins: ['Potassium', 'Vitamin B6', 'Vitamin C'],
+    },
+    organic: true,
+  },
+  {
+    id: 14,
+    name: 'Brussels Sprouts',
+    category: 'Cruciferous',
+    price: 3.99,
+    image: 'https://images.unsplash.com/photo-1587411768695-614a5f6c0522?w=800&q=80',
+    nutrition: {
+      calories: 43,
+      vitamins: ['Vitamin K', 'Vitamin C', 'Folate'],
+    },
+    organic: true,
+  },
+  {
+    id: 15,
+    name: 'Organic Apples',
+    category: 'Fruits',
+    price: 4.49,
+    image: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=80',
+    nutrition: {
+      calories: 52,
+      vitamins: ['Vitamin C', 'Fiber', 'Potassium'],
+    },
+    organic: true,
+  },
+  {
+    id: 16,
+    name: 'Fresh Zucchini',
+    category: 'Vegetables',
+    price: 2.79,
+    image: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=800&q=80',
+    nutrition: {
+      calories: 17,
+      vitamins: ['Vitamin C', 'Vitamin A', 'Potassium'],
+    },
+    organic: true,
+  },
+  {
+    id: 17,
+    name: 'Organic Raspberries',
+    category: 'Berries',
+    price: 6.49,
+    image: 'https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?w=800&q=80',
+    nutrition: {
+      calories: 52,
+      vitamins: ['Vitamin C', 'Fiber', 'Antioxidants'],
+    },
+    organic: true,
+  },
+  {
+    id: 18,
+    name: 'Fresh Cauliflower',
+    category: 'Cruciferous',
+    price: 3.79,
+    image: 'https://images.unsplash.com/photo-1568584711271-e5e239d0f88c?w=800&q=80',
+    nutrition: {
+      calories: 25,
+      vitamins: ['Vitamin C', 'Vitamin K', 'Folate'],
+    },
+    organic: true,
+  },
+  {
+    id: 19,
+    name: 'Organic Lemons',
+    category: 'Fruits',
+    price: 3.99,
+    image: 'https://images.unsplash.com/photo-1590502593747-42a996133562?w=800&q=80',
+    nutrition: {
+      calories: 29,
+      vitamins: ['Vitamin C', 'Folate', 'Potassium'],
+    },
+    organic: true,
+  },
+  {
+    id: 20,
+    name: 'Red Beets',
+    category: 'Root Vegetables',
+    price: 3.29,
+    image: 'https://images.unsplash.com/photo-1595273700325-bd0fa11d5fb1?w=800&q=80',
+    nutrition: {
+      calories: 43,
+      vitamins: ['Folate', 'Manganese', 'Fiber'],
+    },
+    organic: true,
+  },
+]; 
+
+
+// import type { ProductCardProps } from '../components/ProductCard'
+
+// type Product = ProductCardProps & { id:string | number}
+
+
+// export async function fetchProductsFromOFF(): Promise<Product[]> {
+//    const res = await fetch(
+//     "https://world.openfoodfacts.org/category/fruits.json?fields=product_name,brands,image_front_url,nutriscore_grade,nutriments,labels,ingredients_text"
+//   )
+
+//   if(!res.ok){ 
+//     throw new Error("failed to fetch")
+//   }
+
+//   const data = await res.json()
+
+// // product return OFF products:[...]
+// const items  = data.products.slice(0,24)
+// const products: Product[] = items
+//                           .filter((prod: any) => prod.product_name && prod.image_front_url && prod.nutriments)
+//                           .map((prod:any, index:number) => { 
+//                           const nutriments = prod.nutriments || {}
+
+//                           // calorie estimates / 100g
+//                         const calories = 
+//                                 nutriments["energy-kcal_100g"] ??
+//                                 nutriments["energy-kcal"] ??
+//                                 nutriments["energy_100g"] ??
+//                                 0
+
+//                         // vitamin in the product
+//                         const ingredient = (prod.ingredients_text ?? '').toLowerCase()
+//                         const vitamins : string[] = []
+//                         if(ingredient.include("vitamin c")) vitamins.push("Vitamin C")
+//                         if(ingredient.include("vitamin a")) vitamins.push("Vitamin A")
+//                         if(ingredient.include("iron")) vitamins.push("Iron")
+
+//                           if(vitamins.length === 0 ){ 
+//                             vitamins.push("Natural Nutrients")
+//                           }
+                        
+//                         const labels = (prod.labels ?? "").toLowerCase()
+//                         const organic = 
+//                               labels.includes("organic") ||
+//                               labels.includes("bio") ||
+//                               labels.includes("ecologique") ||
+//                               labels.includes("non-gmo") 
+                        
+//                         // fake price 
+//                         const basePrice = 5 + Math.random()*12
+//                         const price = Math.round(basePrice*100)/100
+
+//                         return {
+//                                 id: prod.id ?? index,
+//                                 name: prod.product_name,
+//                                 category: "Fruits / Grocery",
+//                                 price,
+//                                 image: prod.image_front_url,
+//                                 nutrition: {
+//                                   calories: Math.round(calories) || 50,
+//                                   vitamins,
+//                                 },
+//                                 organic,
+//                               }
+
+
+//                           })
+
+//                           return products
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export type Product = { 
+//   id: number 
+//   name : string 
+//   category: string 
+//   price: string 
+//   image: string
+//   nutrition: { 
+//     calories: number
+//     vitamin: string[]
+
+//   } 
+//   organic: boolean
+// }
