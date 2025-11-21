@@ -1,13 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
-
-
-// type Product = React.ComponentProps<typeof ProductCard> & { id: number | string }
+import { addToCart } from '@/redux/slices/cartSlice'
+import { toast } from 'sonner'
 
 interface ProductCardProps { 
+    id: string | number
     name:string
     category: string
     price: number
@@ -20,7 +21,14 @@ interface ProductCardProps {
 }
 
 
-const ProductCard = ({name, category, price, image, nutrition, organic} : ProductCardProps) => {
+const ProductCard = ({id, name, category, price, image, nutrition, organic} : ProductCardProps) => {
+  const dispatch = useDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image, category }))
+    toast.success(`${name} added to cart!`)
+  }
+
   return (
         <Card className="overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-300 group" role="article" aria-label={`${name} product card`}>
       <CardHeader className="p-0">
@@ -57,7 +65,7 @@ const ProductCard = ({name, category, price, image, nutrition, organic} : Produc
         <span className="text-2xl font-bold text-primary" aria-label={`Price: ${price} dollars`}>
           ${price.toFixed(2)}
         </span>
-        <Button variant="default" size="sm" aria-label={`Add ${name} to cart`}>
+        <Button variant="default" size="sm" onClick={handleAddToCart} aria-label={`Add ${name} to cart`}>
           <ShoppingCart className="h-4 w-4 mr-2" aria-hidden="true" />
           Add to Cart
         </Button>

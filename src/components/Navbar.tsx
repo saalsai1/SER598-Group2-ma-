@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Accessibility, Leaf, Menu, ShoppingCart, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Accessibility, Leaf, Menu, ShoppingCart, X, User, LogOut, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AccessibilityMenu from "./AccessibilityMenu";
+import { RootState } from "@/redux/store";
+import { logout } from "@/redux/slices/authSlice";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
+  const { items } = useSelector((state: RootState) => state.cart);
+
+  const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setUserMenuOpen(false);
+    navigate('/');
+  };
 
   return (
     <nav
@@ -78,15 +95,59 @@ const Navbar = () => {
             >
               <Accessibility className="h-5 w-5" aria-hidden="true" />
             </Button>
-            <Button variant="ghost" size="icon" aria-label="Shopping cart">
-              <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-            </Button>
-            <Button variant="default" size="default">
-              Shop Now
-            </Button>
-            <Button variant="default" size="default" className="cursor-pointer">
-              Login
-            </Button>
+            <Link to="/checkout">
+              <Button variant="ghost" size="icon" aria-label="Shopping cart" className="relative">
+                <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
+            
+            {isAuthenticated ? (
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  aria-label="User menu"
+                  aria-expanded={userMenuOpen}
+                >
+                  <User className="h-5 w-5" aria-hidden="true" />
+                </Button>
+                {userMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-56 bg-card border border-border rounded-lg shadow-lg p-2 z-50">
+                    <div className="px-3 py-2 border-b border-border mb-2">
+                      <p className="font-semibold">{user?.name}</p>
+                      <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
+                    </div>
+                    <Link to="/order-history" onClick={() => setUserMenuOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start" size="sm">
+                        <Package className="h-4 w-4 mr-2" />
+                        Order History
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      size="sm"
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login">
+                <Button variant="default" size="default">
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -145,12 +206,34 @@ const Navbar = () => {
                 >
                   <Accessibility className="h-5 w-5" aria-hidden="true" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Shopping cart">
-                  <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-                </Button>
-                <Button variant="default" className="flex-1">
-                  Shop Now
-                </Button>
+                <Link to="/checkout">
+                  <Button variant="ghost" size="icon" aria-label="Shopping cart" className="relative">
+                    <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+                    {cartItemCount > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                        {cartItemCount}
+                      </span>
+                    )}
+                  </Button>
+                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link to="/order-history" className="flex-1">
+                      <Button variant="outline" className="w-full">
+                        Orders
+                      </Button>
+                    </Link>
+                    <Button variant="default" onClick={handleLogout} className="flex-1">
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <Link to="/login" className="flex-1">
+                    <Button variant="default" className="w-full">
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
