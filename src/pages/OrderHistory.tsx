@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation, replace } from 'react-router-dom';
 import { RootState } from '@/redux/store';
 import Navbar from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,11 +14,21 @@ const OrderHistory = () => {
   const { orders } = useSelector((state: RootState) => state.orderHistory);
   const accessibility = useSelector((state: RootState) => state.accessibility);
 
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate('/login');
+  //   }
+  // }, [isAuthenticated, navigate]);
+
+  // fix the protected route from login
+  const location = useLocation()
+
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login');
+      navigate('/login' , { state : { from: location, replace: true}});
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location]);
+
 
   const userOrders = user ? orders.filter(order => order.userId === user.id) : [];
 

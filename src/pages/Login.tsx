@@ -35,7 +35,6 @@ const Login = () => {
     }
 
     // For demo purposes, we'll accept any credentials
-    // In a real app, you'd authenticate with a backend
     const user = {
       id: Date.now().toString(),
       email,
@@ -68,7 +67,7 @@ const Login = () => {
         <CardHeader className="space-y-1 flex flex-col items-center">
           <div className="flex items-center gap-2 mb-4">
             <Leaf className="h-10 w-10 text-primary" aria-hidden="true" />
-            <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="text-3xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
               Orange Sulphur
             </span>
           </div>

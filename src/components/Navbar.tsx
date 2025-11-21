@@ -17,7 +17,17 @@ const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
   const { items } = useSelector((state: RootState) => state.cart);
 
+  // const accessibility = useSelector((state:RootState) => state.accessibility)
+
   const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  // handle the onSelect on accessibilityMenu
+  // const hasAccessibilitOverrides = 
+  // accessibility.highContrast || 
+  // accessibility.reducedMotion || 
+  // accessibility.dyslexiaFont || 
+  // accessibility.fontSize !== "normal" || 
+  // accessibility.colorBlindMode !== "none"
 
   const handleLogout = () => {
     dispatch(logout());
@@ -92,6 +102,10 @@ const Navbar = () => {
               onClick={() => setAccessibilityOpen(!accessibilityOpen)}
               aria-label="Toggle accessibility options"
               aria-expanded={accessibilityOpen}
+              // className={`relative tracking-all duration-200 ${ 
+              //   hasAccessibilitOverrides ? "text-orange-500 bg-orange-500/10 ring-2-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.9)] hover:bg-orange-500/20"
+              //   : ""
+              //   }`}
             >
               <Accessibility className="h-5 w-5" aria-hidden="true" />
             </Button>
@@ -107,22 +121,39 @@ const Navbar = () => {
             </Link>
             
             {isAuthenticated ? (
-              <div className="relative">
+              <div className="relative flex flex-col items-center">
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                   aria-label="User menu"
                   aria-expanded={userMenuOpen}
+                  className={`transition-all duration-200 ${
+                              userMenuOpen
+                                ? 'bg-primary/10 text-primary ring-2 ring-primary shadow-[0_0_10px_rgba(249,115,22,0.8)]'
+                                : 'text-primary'
+                        }`}
                 >
+                  {/* {user?.name} */}
                   <User className="h-5 w-5" aria-hidden="true" />
                 </Button>
+                
+                {/* name under icon */}
+                {/* {user?.name && ( 
+                  <span
+                  className="mt-[-5] text-[0.7rem] text-muted-foreground max-w-[80px] truncate text-center"
+                  >
+                    {user.name}
+                  </span>
+                )} */}
+                
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-card border border-border rounded-lg shadow-lg p-2 z-50">
+                  <div className="absolute right-6 mt-9 w-56 bg-card border border-border rounded-lg shadow-lg p-2 z-50">
                     <div className="px-3 py-2 border-b border-border mb-2">
                       <p className="font-semibold">{user?.name}</p>
                       <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
                     </div>
+                     
                     <Link to="/order-history" onClick={() => setUserMenuOpen(false)}>
                       <Button variant="ghost" className="w-full justify-start" size="sm">
                         <Package className="h-4 w-4 mr-2" />
