@@ -239,12 +239,7 @@ export const products = [
     },
     organic: true,
   },
-];
-
-
-
-
-// Live data fetching type 
+]; 
 
 
 // import type { ProductCardProps } from '../components/ProductCard'
