@@ -9,6 +9,7 @@ import Store from "./pages/Store";
 import NotFound from "./pages/NotFound";
 import Recipe from './pages/Recipe';
 import Login from './pages/Login';
+import Register from './pages/Register';  // ← Add this import
 import OrderHistory from './pages/OrderHistory';
 import Checkout from './pages/Checkout';
 import AccessibilityEffects from "@/components/AccessibilityEffects";
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/store" element={<Store />} />
             <Route path="/recipes" element={<Recipe />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />  {/* ← Add this route */}
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="*" element={<NotFound />} />
