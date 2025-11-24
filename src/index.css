@@ -197,14 +197,82 @@ html.a11y-high-contrast {
   filter: contrast(1.25) saturate(1.2);
 }
 
-/* Reduced motion */
-html.a11y-reduced-motion * {
-  animation: none !important;
-  transition: none !important;
+html.a11y-reduced-motion *,
+html.a11y-reduced-motion *::before,
+html.a11y-reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
-/* Dyslexia-friendly font */
-html.a11y-dyslexia-font {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "OpenDyslexic", sans-serif;
+/* Specifically disable common animations */
+html.a11y-reduced-motion .animate-slide-up,
+html.a11y-reduced-motion .animate-fade-in,
+html.a11y-reduced-motion .animate-bounce-gentle,
+html.a11y-reduced-motion [class*="animate-"] {
+  animation: none !important;
+}
+
+/* Disable hover animations when reduced motion is on */
+html.a11y-reduced-motion *:hover {
+  transition: none !important;
+  transform: none !important;
+}
+
+
+html.a11y-dyslexia-font,
+html.a11y-dyslexia-font * {
+  /* Use Comic Sans MS as primary - it's widely available and dyslexia-friendly */
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Marker Felt", 
+               cursive, sans-serif !important;
+  
+  /* Increase letter spacing for better readability */
+  letter-spacing: 0.05em !important;
+  
+  /* Increase line height */
+  line-height: 1.6 !important;
+  
+  /* Slightly increase word spacing */
+  word-spacing: 0.1em !important;
+}
+
+/* Make headings even more readable with dyslexia font */
+html.a11y-dyslexia-font h1,
+html.a11y-dyslexia-font h2,
+html.a11y-dyslexia-font h3,
+html.a11y-dyslexia-font h4,
+html.a11y-dyslexia-font h5,
+html.a11y-dyslexia-font h6 {
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Ensure buttons and inputs also get the font */
+html.a11y-dyslexia-font button,
+html.a11y-dyslexia-font input,
+html.a11y-dyslexia-font textarea,
+html.a11y-dyslexia-font select {
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+}
+
+
+/* Better focus indicators for all accessibility modes */
+html.a11y-high-contrast *:focus-visible {
+  outline: 3px solid #ff6b00 !important;
+  outline-offset: 2px !important;
+}
+
+/* Ensure skip link is always visible when focused */
+.sr-only:focus {
+  position: fixed !important;
+  top: 1rem !important;
+  left: 1rem !important;
+  z-index: 9999 !important;
+  padding: 0.75rem 1.5rem !important;
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
