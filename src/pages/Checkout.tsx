@@ -37,7 +37,40 @@ const Checkout = () => {
     toast.success('Item removed from cart');
   };
 
+  // Manual save to localStorage as backup
+  const manualSaveOrder = (order: any) => {
+    try {
+      console.log('💾 Manual save - Starting...');
+      const existingOrders = localStorage.getItem('order_history');
+      console.log('💾 Existing orders:', existingOrders);
+      
+      const orders = existingOrders ? JSON.parse(existingOrders) : [];
+      console.log('💾 Parsed orders:', orders);
+      
+      orders.unshift(order);
+      console.log('💾 Orders after adding new:', orders);
+      
+      localStorage.setItem('order_history', JSON.stringify(orders));
+      console.log('💾 Manual save - SUCCESS');
+      
+      // Verify
+      const verify = localStorage.getItem('order_history');
+      console.log('💾 Verification:', verify);
+      
+      return true;
+    } catch (error) {
+      console.error('❌ Manual save failed:', error);
+      return false;
+    }
+  };
+
   const handlePlaceOrder = () => {
+    console.log('🛒 ========== PLACE ORDER CLICKED ==========');
+    console.log('📦 Cart items:', items);
+    console.log('👤 Current user:', user);
+    console.log('📍 Shipping address:', shippingAddress);
+    console.log('💳 Payment method:', paymentMethod);
+    
     if (items.length === 0) {
       toast.error('Your cart is empty');
       return;
@@ -54,21 +87,75 @@ const Checkout = () => {
       return;
     }
 
-    const order = {
-      id: Date.now().toString(),
-      userId: user.id,
-      items: [...items],
-      total,
-      date: new Date().toISOString(),
-      status: 'pending' as const,
-      shippingAddress,
-      paymentMethod,
-    };
+    try {
+      // Create order with explicit property mapping
+      const order = {
+        id: Date.now().toString(),
+        userId: user.id,
+        items: items.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+          category: item.category || 'Uncategorized',
+        })),
+        total: total,
+        date: new Date().toISOString(),
+        status: 'pending' as const,
+        shippingAddress: shippingAddress,
+        paymentMethod: paymentMethod,
+      };
 
-    dispatch(addOrder(order));
-    dispatch(clearCart());
-    toast.success('Order placed successfully!');
-    navigate('/order-history');
+      console.log('📦 ========== ORDER CREATED ==========');
+      console.log('Order ID:', order.id);
+      console.log('User ID:', order.userId);
+      console.log('Items count:', order.items.length);
+      console.log('Total:', order.total);
+      console.log('Full order object:', order);
+
+      // Method 1: Manual save to localStorage
+      console.log('💾 Method 1: Manual save...');
+      const manuallySaved = manualSaveOrder(order);
+      console.log('💾 Manual save result:', manuallySaved);
+
+      // Method 2: Redux dispatch
+      console.log('🔄 Method 2: Redux dispatch...');
+      dispatch(addOrder(order));
+      console.log('✅ Redux dispatch completed');
+
+      // Verify after a short delay
+      setTimeout(() => {
+        const savedOrders = localStorage.getItem('order_history');
+        console.log('🔍 ========== VERIFICATION ==========');
+        console.log('LocalStorage raw:', savedOrders);
+        if (savedOrders) {
+          const parsed = JSON.parse(savedOrders);
+          console.log('LocalStorage parsed:', parsed);
+          console.log('Number of orders:', parsed.length);
+        } else {
+          console.error('❌ NO ORDERS IN LOCALSTORAGE!');
+        }
+      }, 200);
+
+      // Clear cart
+      dispatch(clearCart());
+      console.log('🗑️ Cart cleared');
+
+      // Success message
+      toast.success('Order placed successfully!');
+      console.log('✅ ========== ORDER PROCESS COMPLETE ==========');
+      
+      // Navigate after a short delay
+      setTimeout(() => {
+        navigate('/order-history');
+      }, 500);
+
+    } catch (error) {
+      console.error('❌ ========== ERROR PLACING ORDER ==========');
+      console.error('Error details:', error);
+      toast.error('Failed to place order. Please try again.');
+    }
   };
 
   if (!isAuthenticated) {

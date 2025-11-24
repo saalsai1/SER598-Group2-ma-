@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginUser, clearError } from '@/redux/slices/authSlice';
+import { signupUser, clearError } from '@/redux/slices/authSlice';
 import { RootState } from '@/redux/store';
 import Navbar from '@/components/Navbar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,24 +9,27 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { toast } from 'sonner';
 
-const Login = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, error, user } = useSelector((state: RootState) => state.auth);
   const accessibility = useSelector((state: RootState) => state.accessibility);
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      console.log('✅ User authenticated');
-      console.log('👤 User ID:', user.id);
-      toast.success(`Welcome back, ${user.name}!`);
+      console.log('✅ User registered successfully');
+      console.log('👤 New User ID:', user.id);
+      toast.success(`Welcome, ${user.name}!`);
       navigate('/store');
     }
   }, [isAuthenticated, user, navigate]);
@@ -39,22 +42,32 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    console.log('🔐 Login attempt:', email);
-    
-    if (!email || !password) {
+
+    console.log('📝 Registration attempt:', email);
+
+    if (!name || !email || !password || !confirmPassword) {
       toast.error('Please fill in all fields');
       return;
     }
 
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
+    }
+
     dispatch(clearError());
-    dispatch(loginUser({ email, password }));
+    dispatch(signupUser({ name, email, password }));
   };
 
   useEffect(() => {
     if (error) {
       toast.error(error);
-      console.log('❌ Login error:', error);
+      console.log('❌ Registration error:', error);
     }
   }, [error]);
 
@@ -80,9 +93,9 @@ const Login = () => {
         <div className="max-w-md mx-auto">
           <Card>
             <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+              <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
               <CardDescription>
-                Enter your credentials to access your account
+                Enter your details to create a new account
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -92,6 +105,23 @@ const Login = () => {
                     <AlertDescription>{error}</AlertDescription>
                   </Alert>
                 )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="pl-10"
+                      required
+                      aria-label="Full name"
+                    />
+                  </div>
+                </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
@@ -122,6 +152,7 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10 pr-10"
                       required
+                      minLength={6}
                       aria-label="Password"
                     />
                     <button
@@ -139,14 +170,44 @@ const Login = () => {
                   </div>
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="pl-10 pr-10"
+                      required
+                      minLength={6}
+                      aria-label="Confirm password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
                 <Button type="submit" className="w-full" size="lg">
-                  Sign In
+                  Create Account
                 </Button>
 
                 <div className="text-center text-sm">
-                  <span className="text-muted-foreground">Don't have an account? </span>
-                  <Link to="/register" className="text-primary hover:underline">
-                    Register here
+                  <span className="text-muted-foreground">Already have an account? </span>
+                  <Link to="/login" className="text-primary hover:underline">
+                    Sign in
                   </Link>
                 </div>
               </form>
@@ -158,4 +219,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
