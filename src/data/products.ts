@@ -28,7 +28,7 @@ export const products = [
     name: 'Heirloom Tomatoes',
     category: 'Vegetables',
     price: 5.99,
-    image: 'https://images.unsplash.com/photo-1546470427-e26264be0fbd?w=800&q=80',
+    image: '/images/heirloom-tomatoes.jpeg',
     nutrition: {
       calories: 18,
       vitamins: ['Vitamin C', 'Vitamin K', 'Potassium'],
@@ -52,7 +52,7 @@ export const products = [
     name: 'Fresh Kale',
     category: 'Leafy Greens',
     price: 4.49,
-    image: 'https://images.unsplash.com/photo-1560170412-572ca8d7fa9b?w=800&q=80',
+    image: '/images/fresh-kale.jpeg',
     nutrition: {
       calories: 33,
       vitamins: ['Vitamin K', 'Vitamin C', 'Calcium'],
@@ -112,7 +112,7 @@ export const products = [
     name: 'Sweet Potatoes',
     category: 'Root Vegetables',
     price: 3.49,
-    image: 'https://images.unsplash.com/photo-1589927986089-35812378d7a9?w=800&q=80',
+    image: '/images/sweet-potato.jpeg',
     nutrition: {
       calories: 86,
       vitamins: ['Vitamin A', 'Vitamin C', 'Fiber'],
@@ -136,7 +136,7 @@ export const products = [
     name: 'Fresh Asparagus',
     category: 'Vegetables',
     price: 4.79,
-    image: 'https://images.unsplash.com/photo-1565808332270-7f9faf92e7e5?w=800&q=80',
+    image: '/images/asparagus.jpeg',
     nutrition: {
       calories: 20,
       vitamins: ['Vitamin K', 'Folate', 'Vitamin C'],
@@ -160,7 +160,7 @@ export const products = [
     name: 'Brussels Sprouts',
     category: 'Cruciferous',
     price: 3.99,
-    image: 'https://images.unsplash.com/photo-1587411768695-614a5f6c0522?w=800&q=80',
+    image: '/images/brussels-sprouts.jpeg',
     nutrition: {
       calories: 43,
       vitamins: ['Vitamin K', 'Vitamin C', 'Folate'],
@@ -184,7 +184,7 @@ export const products = [
     name: 'Fresh Zucchini',
     category: 'Vegetables',
     price: 2.79,
-    image: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?w=800&q=80',
+    image: '/images/zucchini.jpeg',
     nutrition: {
       calories: 17,
       vitamins: ['Vitamin C', 'Vitamin A', 'Potassium'],
@@ -208,7 +208,7 @@ export const products = [
     name: 'Fresh Cauliflower',
     category: 'Cruciferous',
     price: 3.79,
-    image: 'https://images.unsplash.com/photo-1568584711271-e5e239d0f88c?w=800&q=80',
+    image: '/images/cauliflower.jpeg',
     nutrition: {
       calories: 25,
       vitamins: ['Vitamin C', 'Vitamin K', 'Folate'],
@@ -232,111 +232,11 @@ export const products = [
     name: 'Red Beets',
     category: 'Root Vegetables',
     price: 3.29,
-    image: 'https://images.unsplash.com/photo-1595273700325-bd0fa11d5fb1?w=800&q=80',
+    image: '/images/red-beets.jpeg',
     nutrition: {
       calories: 43,
       vitamins: ['Folate', 'Manganese', 'Fiber'],
     },
     organic: true,
   },
-]; 
-
-
-// import type { ProductCardProps } from '../components/ProductCard'
-
-// type Product = ProductCardProps & { id:string | number}
-
-
-// export async function fetchProductsFromOFF(): Promise<Product[]> {
-//    const res = await fetch(
-//     "https://world.openfoodfacts.org/category/fruits.json?fields=product_name,brands,image_front_url,nutriscore_grade,nutriments,labels,ingredients_text"
-//   )
-
-//   if(!res.ok){ 
-//     throw new Error("failed to fetch")
-//   }
-
-//   const data = await res.json()
-
-// // product return OFF products:[...]
-// const items  = data.products.slice(0,24)
-// const products: Product[] = items
-//                           .filter((prod: any) => prod.product_name && prod.image_front_url && prod.nutriments)
-//                           .map((prod:any, index:number) => { 
-//                           const nutriments = prod.nutriments || {}
-
-//                           // calorie estimates / 100g
-//                         const calories = 
-//                                 nutriments["energy-kcal_100g"] ??
-//                                 nutriments["energy-kcal"] ??
-//                                 nutriments["energy_100g"] ??
-//                                 0
-
-//                         // vitamin in the product
-//                         const ingredient = (prod.ingredients_text ?? '').toLowerCase()
-//                         const vitamins : string[] = []
-//                         if(ingredient.include("vitamin c")) vitamins.push("Vitamin C")
-//                         if(ingredient.include("vitamin a")) vitamins.push("Vitamin A")
-//                         if(ingredient.include("iron")) vitamins.push("Iron")
-
-//                           if(vitamins.length === 0 ){ 
-//                             vitamins.push("Natural Nutrients")
-//                           }
-                        
-//                         const labels = (prod.labels ?? "").toLowerCase()
-//                         const organic = 
-//                               labels.includes("organic") ||
-//                               labels.includes("bio") ||
-//                               labels.includes("ecologique") ||
-//                               labels.includes("non-gmo") 
-                        
-//                         // fake price 
-//                         const basePrice = 5 + Math.random()*12
-//                         const price = Math.round(basePrice*100)/100
-
-//                         return {
-//                                 id: prod.id ?? index,
-//                                 name: prod.product_name,
-//                                 category: "Fruits / Grocery",
-//                                 price,
-//                                 image: prod.image_front_url,
-//                                 nutrition: {
-//                                   calories: Math.round(calories) || 50,
-//                                   vitamins,
-//                                 },
-//                                 organic,
-//                               }
-
-
-//                           })
-
-//                           return products
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export type Product = { 
-//   id: number 
-//   name : string 
-//   category: string 
-//   price: string 
-//   image: string
-//   nutrition: { 
-//     calories: number
-//     vitamin: string[]
-
-//   } 
-//   organic: boolean
-// }
+];
