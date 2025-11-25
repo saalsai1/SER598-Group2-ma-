@@ -28,7 +28,7 @@ export const products = [
     name: 'Heirloom Tomatoes',
     category: 'Vegetables',
     price: 5.99,
-    image: '/images/heirloom-tomatoes.jpeg',
+    image: 'https://plus.unsplash.com/premium_photo-1672160839695-916162421050?q=80&w=691&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 18,
       vitamins: ['Vitamin C', 'Vitamin K', 'Potassium'],
@@ -52,7 +52,7 @@ export const products = [
     name: 'Fresh Kale',
     category: 'Leafy Greens',
     price: 4.49,
-    image: '/images/fresh-kale.jpeg',
+    image: 'https://plus.unsplash.com/premium_photo-1702286619569-e69728b392dc?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 33,
       vitamins: ['Vitamin K', 'Vitamin C', 'Calcium'],
@@ -112,7 +112,7 @@ export const products = [
     name: 'Sweet Potatoes',
     category: 'Root Vegetables',
     price: 3.49,
-    image: '/images/sweet-potato.jpeg',
+    image: 'https://images.unsplash.com/photo-1570723735746-c9bd51bd7c40?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 86,
       vitamins: ['Vitamin A', 'Vitamin C', 'Fiber'],
@@ -136,7 +136,7 @@ export const products = [
     name: 'Fresh Asparagus',
     category: 'Vegetables',
     price: 4.79,
-    image: '/images/asparagus.jpeg',
+    image: 'https://images.unsplash.com/photo-1553565592-9fde6a2a9db8?q=80&w=719&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 20,
       vitamins: ['Vitamin K', 'Folate', 'Vitamin C'],
@@ -160,7 +160,7 @@ export const products = [
     name: 'Brussels Sprouts',
     category: 'Cruciferous',
     price: 3.99,
-    image: '/images/brussels-sprouts.jpeg',
+    image: 'https://images.unsplash.com/photo-1614087434853-25e6e8357217?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 43,
       vitamins: ['Vitamin K', 'Vitamin C', 'Folate'],
@@ -184,7 +184,7 @@ export const products = [
     name: 'Fresh Zucchini',
     category: 'Vegetables',
     price: 2.79,
-    image: '/images/zucchini.jpeg',
+    image: 'https://plus.unsplash.com/premium_photo-1692878409001-1e18a9457363?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 17,
       vitamins: ['Vitamin C', 'Vitamin A', 'Potassium'],
@@ -208,7 +208,7 @@ export const products = [
     name: 'Fresh Cauliflower',
     category: 'Cruciferous',
     price: 3.79,
-    image: '/images/cauliflower.jpeg',
+    image: 'https://images.unsplash.com/photo-1579705743135-bc6ef4f6a8d7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 25,
       vitamins: ['Vitamin C', 'Vitamin K', 'Folate'],
@@ -232,7 +232,7 @@ export const products = [
     name: 'Red Beets',
     category: 'Root Vegetables',
     price: 3.29,
-    image: '/images/red-beets.jpeg',
+    image: 'https://plus.unsplash.com/premium_photo-1700072295449-1cf40c665fe0?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     nutrition: {
       calories: 43,
       vitamins: ['Folate', 'Manganese', 'Fiber'],
