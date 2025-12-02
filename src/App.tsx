@@ -9,6 +9,8 @@ import Store from "./pages/Store";
 import NotFound from "./pages/NotFound";
 import Recipe from './pages/Recipe';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import About from './pages/About';  // ← Add this
 import OrderHistory from './pages/OrderHistory';
 import Checkout from './pages/Checkout';
 import AccessibilityEffects from "@/components/AccessibilityEffects";
@@ -20,15 +22,15 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BrowserRouter>
-          {/* Applies high contrast, font size, color-blind mode, etc */}
           <AccessibilityEffects />
-
           <Sonner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/store" element={<Store />} />
             <Route path="/recipes" element={<Recipe />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />  {/* ← Add this */}
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="*" element={<NotFound />} />

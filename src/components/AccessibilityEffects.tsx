@@ -25,10 +25,29 @@ export default function AccessibilityEffects() {
     FONT_SIZES.forEach((size) => root.classList.remove(`fs-${size}`));
     root.classList.add(`fs-${fontSize}`);
 
-    // Toggles
-    root.classList.toggle("a11y-high-contrast", highContrast);
-    root.classList.toggle("a11y-reduced-motion", reducedMotion);
-    root.classList.toggle("a11y-dyslexia-font", dyslexiaFont);
+// Toggles - using explicit if/else for debugging
+    if (highContrast) {
+      root.classList.add("a11y-high-contrast");
+    } else {
+      root.classList.remove("a11y-high-contrast");
+    }
+
+    if (reducedMotion) {
+      root.classList.add("a11y-reduced-motion");
+      console.log(" Reduced motion enabled - class added to HTML");
+    } else {
+      root.classList.remove("a11y-reduced-motion");
+      console.log(" Reduced motion disabled - class removed from HTML");
+    }
+
+    if (dyslexiaFont) {
+      root.classList.add("a11y-dyslexia-font");
+    } else {
+      root.classList.remove("a11y-dyslexia-font");
+    }
+
+    // Log current classes for debugging
+    console.log("Current HTML classes:", root.className);
   }, [highContrast, fontSize, colorBlindMode, reducedMotion, dyslexiaFont]);
 
   return null; // no UI, just side effects
