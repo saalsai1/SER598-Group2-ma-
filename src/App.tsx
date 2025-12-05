@@ -14,6 +14,7 @@ import About from './pages/About';  // ← Add this
 import OrderHistory from './pages/OrderHistory';
 import Checkout from './pages/Checkout';
 import AccessibilityEffects from "@/components/AccessibilityEffects";
+import Accessibility from './pages/Accessibility';
 
 const queryClient = new QueryClient();
 
@@ -30,7 +31,8 @@ const App = () => (
             <Route path="/recipes" element={<Recipe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />  {/* ← Add this */}
+            <Route path="/about" element={<About />} />  
+            <Route path='/accessibility' element={<Accessibility />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="*" element={<NotFound />} />
