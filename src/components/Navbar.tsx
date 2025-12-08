@@ -92,6 +92,13 @@ const Navbar = () => {
             >
               About
             </Link>
+
+            <Link
+            to="/accessibility"
+            className="text-foreground hover:text-primary transition-colors duration-200" aria-label="Accessibility Tools"
+            >
+            Accessibility
+            </Link>
           </div>
 
           {/* Actions */}
@@ -228,6 +235,11 @@ const Navbar = () => {
               >
                 About
               </Link>
+
+              <Link to="/accessibility" className="text-foreground hover:text-primary transition-colors px-2 py-1" role="menuitem">
+                Accessibility
+              </Link>
+              
               <div className="flex gap-2 pt-2 border-t border-border">
                 <Button
                   variant="ghost"

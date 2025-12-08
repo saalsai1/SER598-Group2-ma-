@@ -8,6 +8,7 @@ interface AccessibilityState {
   reducedMotion: boolean;
   dyslexiaFont: boolean;
   screenReaderEnabled: boolean;
+  autoReadEnabled: boolean;
 }
 
 const initialState: AccessibilityState = {
@@ -17,6 +18,7 @@ const initialState: AccessibilityState = {
   reducedMotion: false,
   dyslexiaFont: false,
   screenReaderEnabled: false,
+  autoReadEnabled: false,
 };
 
 const accessibilitySlice = createSlice({
@@ -41,6 +43,9 @@ const accessibilitySlice = createSlice({
     toggleScreenReader: (state) => {
       state.screenReaderEnabled = !state.screenReaderEnabled;
     },
+     toggleAutoRead: (state) => {
+      state.autoReadEnabled = !state.autoReadEnabled;
+    },
   },
 });
 
@@ -51,6 +56,7 @@ export const {
   toggleReducedMotion,
   toggleDyslexiaFont,
   toggleScreenReader,
+  toggleAutoRead,
 } = accessibilitySlice.actions;
 
 export default accessibilitySlice.reducer;
