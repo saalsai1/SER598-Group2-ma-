@@ -190,11 +190,6 @@ npm run build
 Build output will be in the `dist/` directory.
 
 ---
-## Project Demo
-
-Google Drive: https://drive.google.com/drive/folders/1zfOn6dGLrF_VVbtf44Na2HrHgoLBc_x5?usp=drive_link
-
----
 
 ## 🎮 Usage Guide
 
