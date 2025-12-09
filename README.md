@@ -17,12 +17,12 @@ Orange Sulphur allows users to:
 
 ---
 
-## 🎯 Acceptance Criteria
+## Acceptance Criteria
 
-- ✅ Website serves as an **Online Organic Store**.
-- ✅ Displays **food categories**, **nutritional data**, and **vitamin facts**.
-- ✅ Implements **Recipe Search Integration** using a Recipe API.
-- ✅ Provides **modern accessibility features**:
+-  Website serves as an **Online Organic Store**.
+-  Displays **food categories**, **nutritional data**, and **vitamin facts**.
+-  Implements **Recipe Search Integration** using a Recipe API.
+-  Provides **modern accessibility features**:
 
   - Support for **digital on-screen keyboard**.
   - **Audio narration** and **text-to-speech** features.
@@ -35,7 +35,7 @@ Orange Sulphur allows users to:
 
 ---
 
-## 🏗️ Tech Stack
+##  Tech Stack
 
 | Category                | Technology                                              |
 | ----------------------- | ------------------------------------------------------- |
@@ -57,7 +57,7 @@ Orange Sulphur allows users to:
 - ♿ **Accessibility Suite** – Inclusive support for vision, hearing, and motor impairments.
 - 🌗 **Dynamic Mode Switch** – Toggle between standard and accessibility-enhanced modes.
 - 🔍 **Search & Filter** – Quickly find items by category, name, or nutrition type.
-- 💬 **Voice Assistance (Planned)** – Integrated voice command and feedback system.
+- 💬 **Voice Assistance ** – Integrated voice command and feedback system.
 
 ---
 
@@ -84,7 +84,7 @@ src/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/<your-org>/OrangeSulphur.git
+git clone https://github.com/saalsai/SER598-Group2-ma-.git
 cd SER985-Group2-MA-
 ```
 
@@ -126,7 +126,7 @@ Orange Sulphur aims to comply with:
 ## 📡 APIs Used
 
 - **Recipe API** for fetching fruit/vegetable-based recipes.
-- **(Planned)**: Additional open food/nutrition databases.
+
 
 ---
 
@@ -146,8 +146,8 @@ Orange Sulphur aims to comply with:
 
   - Ritik Zambre - rzambre
   - Prerana Nale - pnale
-  - [Team Member 3]
-  - [Team Member 4]
+  - Bhargav Kodali - bkodali
+  - Saud Alsaif - saalsai1
 
 ---
 
