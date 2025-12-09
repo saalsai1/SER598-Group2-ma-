@@ -1,0 +1,298 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+/* Optional, but nice: make "dark:" work when .dark is on html/body */
+@custom-variant dark (&:is(.dark *));
+
+/* 1) Design tokens: your raw HSL values + extras */
+@layer base {
+  :root {
+    --background: 40 20% 97%;
+    --foreground: 30 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 15% 15%;
+
+    --primary: 28 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 40 20% 90%;
+    --muted-foreground: 30 10% 45%;
+
+    --accent: 35 90% 65%;
+    --accent-foreground: 30 15% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 28 85% 55%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(28 85% 55%),
+      hsl(35 90% 65%)
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(140 50% 45%),
+      hsl(145 55% 50%)
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      hsl(40 20% 97%),
+      hsl(40 30% 95%)
+    );
+
+    --shadow-soft: 0 4px 20px -4px hsl(28 85% 55% / 0.15);
+    --shadow-hover: 0 8px 30px -6px hsl(28 85% 55% / 0.25);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 30 20% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 30 18% 12%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 30 18% 12%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 28 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 30 15% 20%;
+    --muted-foreground: 40 15% 60%;
+
+    --accent: 35 90% 65%;
+    --accent-foreground: 30 20% 10%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 25%;
+    --input: 30 15% 25%;
+    --ring: 28 85% 55%;
+  }
+}
+
+/* 2) Tell Tailwind v4 about your colors/radius so bg-background, border-border, etc work */
+@theme inline {
+  --radius: var(--radius);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+/* 3) Base styles that use Tailwind utilities */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    cursor: pointer;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Color-blind modes */
+html.cb-none {
+  filter: none;
+}
+
+html.cb-protanopia {
+  filter: saturate(0.8) sepia(0.3);
+}
+
+html.cb-deuteranopia {
+  filter: saturate(0.8) hue-rotate(15deg);
+}
+
+html.cb-tritanopia {
+  filter: saturate(0.8) hue-rotate(-45deg);
+}
+
+/* Font sizes tied to redux values: normal / large / xlarge */
+html.fs-normal {
+  font-size: 100%;
+}
+
+html.fs-large {
+  font-size: 112%;
+}
+
+html.fs-xlarge {
+  font-size: 125%;
+}
+
+/* High contrast */
+html.a11y-high-contrast {
+  filter: contrast(1.25) saturate(1.2);
+}
+
+html.a11y-reduced-motion *,
+html.a11y-reduced-motion *::before,
+html.a11y-reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Specifically disable common animations */
+html.a11y-reduced-motion .animate-slide-up,
+html.a11y-reduced-motion .animate-fade-in,
+html.a11y-reduced-motion .animate-bounce-gentle,
+html.a11y-reduced-motion [class*="animate-"] {
+  animation: none !important;
+}
+
+/* Disable hover animations when reduced motion is on */
+html.a11y-reduced-motion *:hover {
+  transition: none !important;
+  transform: none !important;
+}
+
+
+html.a11y-dyslexia-font,
+html.a11y-dyslexia-font * {
+  /* Use Comic Sans MS as primary - it's widely available and dyslexia-friendly */
+  font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Marker Felt", 
+               cursive, sans-serif !important;
+  
+  /* Increase letter spacing for better readability */
+  letter-spacing: 0.05em !important;
+  
+  /* Increase line height */
+  line-height: 1.6 !important;
+  
+  /* Slightly increase word spacing */
+  word-spacing: 0.1em !important;
+}
+
+/* Make headings even more readable with dyslexia font */
+html.a11y-dyslexia-font h1,
+html.a11y-dyslexia-font h2,
+html.a11y-dyslexia-font h3,
+html.a11y-dyslexia-font h4,
+html.a11y-dyslexia-font h5,
+html.a11y-dyslexia-font h6 {
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* Ensure buttons and inputs also get the font */
+html.a11y-dyslexia-font button,
+html.a11y-dyslexia-font input,
+html.a11y-dyslexia-font textarea,
+html.a11y-dyslexia-font select {
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+}
+
+
+/* Better focus indicators for all accessibility modes */
+html.a11y-high-contrast *:focus-visible {
+  outline: 3px solid #ff6b00 !important;
+  outline-offset: 2px !important;
+}
+
+/* Ensure skip link is always visible when focused */
+.sr-only:focus {
+  position: fixed !important;
+  top: 1rem !important;
+  left: 1rem !important;
+  z-index: 9999 !important;
+  padding: 0.75rem 1.5rem !important;
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.5);
+}
