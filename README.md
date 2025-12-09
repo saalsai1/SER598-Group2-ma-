@@ -131,9 +131,6 @@ Orange Sulphur aims to comply with:
 ---
 
 ## 🧠 Future Enhancements
-
-- Integration with **voice assistant commands**.
-- **User authentication** and profile management.
 - **Cart and payment** integration.
 - **Machine learning recommendations** for recipes and nutrition plans.
 - **Dark mode** and **auto-accessibility detection**.
