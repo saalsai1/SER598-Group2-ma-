@@ -15,6 +15,7 @@ import OrderHistory from './pages/OrderHistory';
 import Checkout from './pages/Checkout';
 import AccessibilityEffects from "@/components/AccessibilityEffects";
 import Accessibility from './pages/Accessibility';
+import HandsFreeWrapper from './components/HandsFreeWrapper';
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <BrowserRouter>
           <AccessibilityEffects />
           <Sonner />
+           <HandsFreeWrapper>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/store" element={<Store />} />
@@ -37,6 +39,7 @@ const App = () => (
             <Route path="/order-history" element={<OrderHistory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </HandsFreeWrapper>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

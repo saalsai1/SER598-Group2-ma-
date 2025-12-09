@@ -1,4 +1,3 @@
-// Generated from the AI source
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AccessibilityState {
@@ -9,6 +8,7 @@ interface AccessibilityState {
   dyslexiaFont: boolean;
   screenReaderEnabled: boolean;
   autoReadEnabled: boolean;
+  handsFreeEnabled: boolean;
 }
 
 const initialState: AccessibilityState = {
@@ -19,6 +19,7 @@ const initialState: AccessibilityState = {
   dyslexiaFont: false,
   screenReaderEnabled: false,
   autoReadEnabled: false,
+  handsFreeEnabled: false,
 };
 
 const accessibilitySlice = createSlice({
@@ -43,8 +44,14 @@ const accessibilitySlice = createSlice({
     toggleScreenReader: (state) => {
       state.screenReaderEnabled = !state.screenReaderEnabled;
     },
-     toggleAutoRead: (state) => {
+    toggleAutoRead: (state) => {
       state.autoReadEnabled = !state.autoReadEnabled;
+    },
+    toggleHandsFree: (state) => {
+      state.handsFreeEnabled = !state.handsFreeEnabled;
+    },
+    setHandsFree: (state, action: PayloadAction<boolean>) => {
+      state.handsFreeEnabled = action.payload;
     },
   },
 });
@@ -57,6 +64,8 @@ export const {
   toggleDyslexiaFont,
   toggleScreenReader,
   toggleAutoRead,
+  toggleHandsFree,
+  setHandsFree,
 } = accessibilitySlice.actions;
 
 export default accessibilitySlice.reducer;

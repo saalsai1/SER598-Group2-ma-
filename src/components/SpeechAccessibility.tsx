@@ -9,101 +9,37 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Mic, MicOff, Volume2, Search } from 'lucide-react';
-import { toast } from 'sonner';
+import { useToast } from '@/hooks/use-toast';
+import type { SpeechRecognitionEvent, SpeechRecognitionInstance, SpeechRecognitionConstructor } from '@/types/speech';
 
-// TypeScript declarations for Web Speech API
-interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList;
-  resultIndex: number;
-}
-
-interface SpeechRecognitionResultList {
-  length: number;
-  item(index: number): SpeechRecognitionResult;
-  [index: number]: SpeechRecognitionResult;
-}
-
-interface SpeechRecognitionResult {
-  length: number;
-  item(index: number): SpeechRecognitionAlternative;
-  [index: number]: SpeechRecognitionAlternative;
-  isFinal: boolean;
-}
-
-interface SpeechRecognitionAlternative {
-  transcript: string;
-  confidence: number;
-}
-
-interface SpeechRecognition extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  start(): void;
-  stop(): void;
-  onresult: (event: SpeechRecognitionEvent) => void;
-  onerror: (event: Event) => void;
-  onend: () => void;
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition: new () => SpeechRecognition;
-    webkitSpeechRecognition: new () => SpeechRecognition;
-  }
-}
+// Get SpeechRecognition constructor from window
+const getSpeechRecognition = (): SpeechRecognitionConstructor | null => {
+  const w = window as Window & { 
+    SpeechRecognition?: SpeechRecognitionConstructor; 
+    webkitSpeechRecognition?: SpeechRecognitionConstructor;
+  };
+  return w.SpeechRecognition || w.webkitSpeechRecognition || null;
+};
 
 const SpeechAccessibility: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [isSupported, setIsSupported] = useState({ stt: false, tts: false });
-  
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
-  const [selectedVoiceName, setSelectedVoiceName] = useState<String>('')
-
-
-
-
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
-//   const { toast } = toast();
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+  const { toast } = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const autoReadEnabled = useSelector((state: RootState) => state.accessibility.autoReadEnabled);
 
   // Check browser support on mount
   useEffect(() => {
-    const sttSupported = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
+    const SpeechRecognitionAPI = getSpeechRecognition();
+    const sttSupported = SpeechRecognitionAPI !== null;
     const ttsSupported = 'speechSynthesis' in window;
     setIsSupported({ stt: sttSupported, tts: ttsSupported });
 
-    // voice selction logic
-    const loadVoices= () => { 
-        if( typeof window !== 'undefined' && window.speechSynthesis){ 
-            const availableVoices = window.speechSynthesis.getVoices(); 
-            setVoices(availableVoices); 
-
-            const savedVoice = localStorage.getItem('accessiblity_voice_preference')
-
-            if (savedVoice && availableVoices.some(v => v.name === savedVoice)) {
-            setSelectedVoiceName(savedVoice);
-        } else if (availableVoices.length > 0 && !selectedVoiceName) {
-    
-           const defaultVoice = availableVoices.find(v => v.default) || availableVoices[0];
-           setSelectedVoiceName(defaultVoice.name);
-        }
-    }
-    } 
-
-    loadVoices()
-    if(window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) { 
-        window.speechSynthesis.onvoiceschanged = loadVoices
-    }
-
-
-
     // Initialize Speech Recognition if supported
-    if (sttSupported) {
-      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognitionAPI) {
       recognitionRef.current = new SpeechRecognitionAPI();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = true;
@@ -128,8 +64,10 @@ const SpeechAccessibility: React.FC = () => {
 
       recognitionRef.current.onerror = () => {
         setIsListening(false);
-        toast.info("Speech Recognition Error",{ 
+        toast({
+          title: "Speech Recognition Error",
           description: "Could not recognize speech. Please try again.",
+          variant: "destructive",
         });
       };
 
@@ -146,22 +84,13 @@ const SpeechAccessibility: React.FC = () => {
     };
   }, [toast]);
 
-
- // Handle Voice Change
-  const handleVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const newVoice = e.target.value;
-      setSelectedVoiceName(newVoice);
-      // Persist preference so the result page knows which voice to use
-      localStorage.setItem('accessibility_voice_preference', newVoice);
-  };
-
-
-
   // Toggle Speech-to-Text listening
   const toggleListening = () => {
     if (!isSupported.stt) {
-      toast.info("Not Supported",{ 
+      toast({
+        title: "Not Supported",
         description: "Speech recognition is not supported in your browser.",
+        variant: "destructive",
       });
       return;
     }
@@ -173,7 +102,8 @@ const SpeechAccessibility: React.FC = () => {
       setSearchText('');
       recognitionRef.current?.start();
       setIsListening(true);
-      toast.info("Listening...",{
+      toast({
+        title: "Listening...",
         description: "Speak now. Press Enter to search.",
       });
     }
@@ -191,7 +121,8 @@ const SpeechAccessibility: React.FC = () => {
       // Navigate to store with search query
       navigate(`/store?search=${encodeURIComponent(searchText.trim())}`);
       
-      toast.info("Searching...",{ 
+      toast({
+        title: "Searching...",
         description: `Searching for "${searchText.trim()}"`,
       });
     }
@@ -286,12 +217,6 @@ const SpeechAccessibility: React.FC = () => {
             Auto-read search results aloud
           </Label>
         </div>
-
-        {/* voice search dropwdn */}
-        
-
-
-
         {autoReadEnabled && (
           <p className="text-xs text-muted-foreground">
             When enabled, search results will be automatically read aloud after searching.
