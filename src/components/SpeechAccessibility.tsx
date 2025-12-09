@@ -10,7 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Mic, MicOff, Volume2, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import type { SpeechRecognitionEvent, SpeechRecognitionInstance, SpeechRecognitionConstructor } from '@/types/speech';
+import type { SpeechRecognitionEvent, SpeechRecognitionInstance, SpeechRecognitionConstructor } from '@/types/Speech';
 
 // Get SpeechRecognition constructor from window
 const getSpeechRecognition = (): SpeechRecognitionConstructor | null => {
@@ -41,44 +41,71 @@ const SpeechAccessibility: React.FC = () => {
     // Initialize Speech Recognition if supported
     if (SpeechRecognitionAPI) {
       recognitionRef.current = new SpeechRecognitionAPI();
-      recognitionRef.current.continuous = false;
+      recognitionRef.current.continuous = true; // Enable continuous listening
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-US';
 
       recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+        let interimTranscript = '';
         let finalTranscript = '';
 
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcript = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            finalTranscript = transcript;
+            finalTranscript += transcript;
           } else {
-            setSearchText(transcript);
+            interimTranscript += transcript;
           }
         }
 
         if (finalTranscript) {
           setSearchText(finalTranscript.trim());
+        } else if (interimTranscript) {
+          setSearchText(interimTranscript.trim());
         }
       };
 
-      recognitionRef.current.onerror = () => {
-        setIsListening(false);
-        toast({
-          title: "Speech Recognition Error",
-          description: "Could not recognize speech. Please try again.",
-          variant: "destructive",
-        });
+      recognitionRef.current.onerror = (event: Event & { error: string }) => {
+        console.error('Speech recognition error:', event.error);
+        
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          setIsListening(false);
+          toast({
+            title: "Microphone Access Denied",
+            description: "Please allow microphone access to use voice search.",
+            variant: "destructive",
+          });
+        } else if (event.error === 'no-speech') {
+          // Don't show error for no speech, just continue listening
+          console.log('No speech detected, continuing...');
+        } else if (event.error === 'aborted') {
+          // Intentional stop
+          setIsListening(false);
+        } else if (event.error === 'network') {
+          setIsListening(false);
+          toast({
+            title: "Network Error",
+            description: "Please check your internet connection.",
+            variant: "destructive",
+          });
+        } else {
+          console.warn('Recognition error:', event.error);
+        }
       };
 
       recognitionRef.current.onend = () => {
+        console.log('Speech recognition ended in SpeechAccessibility');
         setIsListening(false);
       };
     }
 
     return () => {
       if (recognitionRef.current) {
-        recognitionRef.current.stop();
+        try {
+          recognitionRef.current.stop();
+        } catch (e) {
+          // Ignore errors on cleanup
+        }
       }
       window.speechSynthesis?.cancel();
     };
