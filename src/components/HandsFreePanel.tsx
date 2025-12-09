@@ -2,7 +2,7 @@ import React from 'react';
 import { useHandsFree } from '../Context/HandsFreeContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { Mic, MicOff, X, HelpCircle } from 'lucide-react';
+import { Mic, MicOff, X, HelpCircle, ListChecks } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HandsFreePanel: React.FC = () => {
@@ -32,14 +32,57 @@ const HandsFreePanel: React.FC = () => {
 
   const handleHelp = () => {
     speak('Available commands: Go to home, store, recipes, cart, or accessibility. Say search for, followed by your query. Say scroll up, scroll down, scroll to top, or scroll to bottom. Say read this page, or read products. Say show my cart. Say exit hands-free mode to deactivate.');
-  };
+  }
 
   const handleClose = () => {
     speak('Hands-free mode deactivated.');
     toggleEnabled();
-  };
+  }
+
+  // always on Command Section 
+  const commandSections = [
+    {
+      title: 'Navigation',
+      items: ['Go to home', 'Go to store', 'Go to recipes', 'Go to cart', 'Order history', 'Accessibility', 'About', 'Login', 'Register']
+    },
+    {
+      title: 'Search',
+      items: [
+        'Search products for <item>',
+        'Search store for <item>',
+        'Search recipes for <dish>',
+        'Find recipes for <dish>'
+      ]
+    },
+    {
+      title: 'Recipes (nested)',
+      items: [
+        'Go to recipes',
+        'Search recipes for chicken',
+        'Search recipes for vegan pasta',
+        'Search recipes for dessert'
+      ]
+    },
+    {
+      title: 'Scrolling',
+      items: ['Scroll up', 'Scroll down', 'Scroll to top', 'Scroll to bottom']
+    },
+    {
+      title: 'Reading',
+      items: ['Read this page', 'Read products']
+    },
+    {
+      title: 'Cart',
+      items: ['Show my cart', "What's in my cart", 'Cart summary']
+    },
+    {
+      title: 'Hands-free',
+      items: ['Help', 'Exit hands-free mode', 'Start mic', 'Stop mic']
+    }
+  ]
 
   return (
+    <>
     <section
       role="region"
       aria-label="Hands-free voice control"
@@ -130,12 +173,78 @@ const HandsFreePanel: React.FC = () => {
       </div>
 
       {/* Keyboard shortcut hint */}
+           {/* Keyboard shortcut hint */}
       <div className="mt-3 pt-2 border-t border-border">
         <p className="text-xs text-muted-foreground">
-          Press <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">Ctrl</kbd> + <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">Alt</kbd> + <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">A</kbd> to toggle
+          Press{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">Ctrl</kbd>{" "}
+          +{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">Alt</kbd>{" "}
+          +{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">A</kbd>{" "}
+          (Windows / Linux) or{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">⌘</kbd>{" "}
+          +{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">Option</kbd>{" "}
+          +{" "}
+          <kbd className="px-1.5 py-0.5 bg-muted rounded text-foreground font-mono">A</kbd>{" "}
+          (macOS) to toggle
         </p>
       </div>
+
     </section>
+
+    <aside
+      className={`
+        fixed top-16 right-4 z-40 w-80 max-w-[90vw]
+        bg-background/80 backdrop-blur-lg border border-border/20 rounded-2xl shadow-2xl
+        transform transition-all duration-300
+        ${accessibility.highContrast ? 'high-contrast' : ''}
+        ${accessibility.reducedMotion ? '' : 'animate-fade-in'}
+        ${accessibility.dyslexiaFont ? 'font-[OpenDyslexic]' : ''}
+      `}
+      aria-label="Hands-free commands help"
+    >
+      <div className="p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <ListChecks className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-foreground">Voice Commands</h3>
+          </div>
+        </div>
+        <div 
+          className="space-y-4 max-h-[75vh] overflow-y-auto pr-3 -mr-3 custom-scrollbar"
+          style={{
+            maskImage: 'linear-gradient(to bottom, transparent, black 8px, black calc(100% - 8px), transparent)',
+          }}
+        >
+          {commandSections.map((section) => (
+            <div key={section.title} className="space-y-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">{section.title}</p>
+              <ul className="space-y-2">
+                {section.items.map((cmd) => (
+                  <li 
+                    key={cmd} 
+                    className="
+                      bg-muted/50 border border-transparent 
+                      hover:bg-muted hover:border-border/30
+                      rounded-lg px-3 py-2 text-sm text-foreground
+                      transition-colors
+                    "
+                  >
+                    {cmd}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </aside>
+
+    </>
   );
 };
 

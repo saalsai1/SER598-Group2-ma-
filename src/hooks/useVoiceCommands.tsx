@@ -98,7 +98,7 @@ export const useVoiceCommands = () => {
       return { action: 'navigate', announcement: 'Navigating to store.', executed: true };
     }
     
-    if (text.includes('go to recipes') || text.includes('open recipes') || text === 'recipes') {
+    if (text.includes('go to recipes') || text.includes('open recipes') || text === 'recipes' || text.includes('go to recipe') || text === 'recipe') {
       navigate('/recipes');
       return { action: 'navigate', announcement: 'Navigating to recipes.', executed: true };
     }
@@ -133,14 +133,26 @@ export const useVoiceCommands = () => {
       return { action: 'navigate', announcement: 'Navigating to registration.', executed: true };
     }
 
-    // Search command
-    const searchMatch = text.match(/search (?:for )?(.+)/);
-    if (searchMatch && searchMatch[1]) {
-      const query = searchMatch[1].trim();
+
+    
+    // Search commands
+    // Recipe search: e.g., "search recipes for chicken"
+    const recipeSearchMatch = text.match(/(?:search|find) (?:recipes? )?(?:for )?(.+)/);
+    if (recipeSearchMatch && recipeSearchMatch[1] && text.includes('recipe')) {
+      const query = recipeSearchMatch[1].trim();
+      navigate(`/recipes?search=${encodeURIComponent(query)}`);
+      return { action: 'search', announcement: `Searching recipes for ${query}.`, executed: true };
+    }
+
+    // Store/product search: e.g., "search products for apples" or "search store apples"
+    const storeSearchMatch = text.match(/(?:search|find) (?:products?|store)(?: for)?\s+(.+)/);
+    if (storeSearchMatch && storeSearchMatch[1]) {
+      const query = storeSearchMatch[1].trim();
       navigate(`/store?search=${encodeURIComponent(query)}`);
       return { action: 'search', announcement: `Searching for ${query}.`, executed: true };
     }
 
+    
     // Scroll commands
     if (text.includes('scroll down')) {
       scrollPage('down');

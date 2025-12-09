@@ -333,18 +333,31 @@ export const HandsFreeProvider: React.FC<HandsFreeProviderProps> = ({ children, 
     }
   }, [isEnabled, getPreferredVoice]);
 
-  // Global keyboard shortcut: Ctrl + Alt + A
+  // Global keyboard shortcut Windows || Mac : Ctrl + Alt + A || ⌘ (metaKey) + Option (altKey) + A
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+        
+        const key = e.key.toLowerCase()
+
+        // windows or linus : Ctrl + Alt + A 
+        const isWindowToggle = e.ctrlKey && e.altKey && key ==='a'
+
+        //Mac :  ⌘ (metaKey) + Option (altKey) + A
+        const isMacToggle = e.metaKey && e.altKey && key ==='a'
+        
+        if (isWindowToggle || isMacToggle) {
+            
         e.preventDefault();
         dispatch(toggleHandsFree());
       }
+      
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [dispatch]);
+
+
 
   const toggleEnabled = useCallback(() => {
     dispatch(toggleHandsFree());
